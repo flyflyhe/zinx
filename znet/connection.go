@@ -93,7 +93,7 @@ func (c *Connection) StartWriter() {
 func (c *Connection) StartReader() {
 	fmt.Println("[Reader Goroutine is running]")
 	defer fmt.Println(c.RemoteAddr().String(), "[conn Reader exit!]")
-	defer c.Stop()
+	defer c.Stop(ziface.CloseConnStat)
 
 	for {
 		select {
@@ -158,7 +158,7 @@ func (c *Connection) Start() {
 }
 
 //Stop 停止连接，结束当前连接状态M
-func (c *Connection) Stop() {
+func (c *Connection) Stop(status int) {
 	c.Lock()
 	defer c.Unlock()
 
@@ -179,8 +179,11 @@ func (c *Connection) Stop() {
 	//关闭Writer
 	c.cancel()
 
-	//将链接从连接管理器中删除
-	c.TCPServer.GetConnMgr().Remove(c)
+	//增加状态 防止死锁
+	if status != ziface.StopServerStat {
+		//将链接从连接管理器中删除
+		c.TCPServer.GetConnMgr().Remove(c)
+	}
 
 	//关闭该链接全部管道
 	close(c.msgBuffChan)

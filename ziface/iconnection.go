@@ -18,10 +18,13 @@ import (
 	"net"
 )
 
+const StopServerStat = 0
+const CloseConnStat = 1
+
 //定义连接接口
 type IConnection interface {
 	Start() 			//启动连接，让当前连接开始工作
-	Stop() 				//停止连接，结束当前连接状态M
+	Stop(int) 				//停止连接，结束当前连接状态M
 	Context() context.Context 		//返回ctx，用于用户自定义的go程获取连接退出状态
 
 	GetTCPConnection() *net.TCPConn //从当前连接获取原始的socket TCPConn

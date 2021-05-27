@@ -73,7 +73,7 @@ func (connMgr *ConnManager) ClearConn() {
 	//停止并删除全部的连接信息
 	for connID, conn := range connMgr.connections {
 		//停止
-		conn.Stop()
+		conn.Stop(ziface.StopServerStat)
 		//删除
 		delete(connMgr.connections, connID)
 	}
@@ -89,7 +89,7 @@ func (connMgr *ConnManager) ClearOneConn(connID uint32) {
 
 	if conn, ok := connMgr.connections[connID]; !ok {
 		//停止
-		conn.Stop()
+		conn.Stop(ziface.StopServerStat)
 		//删除
 		delete(connMgr.connections, connID)
 		fmt.Println("Clear Connections ID:  ", connID, "succeed")

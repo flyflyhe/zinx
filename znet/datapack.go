@@ -5,8 +5,8 @@ import (
 	"encoding/binary"
 	"errors"
 
-	"github.com/aceld/zinx/utils"
-	"github.com/aceld/zinx/ziface"
+	"github.com/flyflyhe/zinx/utils"
+	"github.com/flyflyhe/zinx/ziface"
 )
 
 //DataPack 封包拆包类实例，暂时不需要成员

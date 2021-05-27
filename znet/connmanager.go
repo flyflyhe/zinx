@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"sync"
 
-	"github.com/aceld/zinx/ziface"
+	"github.com/flyflyhe/zinx/ziface"
 )
 
 //ConnManager 连接管理模块

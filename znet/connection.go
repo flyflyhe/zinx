@@ -8,8 +8,8 @@ import (
 	"net"
 	"sync"
 
-	"github.com/aceld/zinx/utils"
-	"github.com/aceld/zinx/ziface"
+	"github.com/flyflyhe/zinx/utils"
+	"github.com/flyflyhe/zinx/ziface"
 )
 
 //Connection 链接
